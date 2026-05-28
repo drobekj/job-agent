@@ -1,0 +1,8 @@
+DB path: jobs.db
+
+ID: 1
+Processed: 2026-05-28 06:33:03
+Score: 21
+Verdict: be good
+Salary estimate: 12345 CZK
+URL: https://www.careers.zurich.com/job/Bratislava-Actuarial-Model-Developer/1358204057/

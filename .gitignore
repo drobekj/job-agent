@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+outputs/
+jobs.db
+.env
+test_api.py
