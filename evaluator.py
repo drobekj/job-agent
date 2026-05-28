@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json
-from config import (OPENAI_API_KEY, MODEL_NAME)
+from config import (OPENAI_API_KEY, MODEL_NAME, USE_REAL_API)
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -22,22 +22,39 @@ def evaluate_job(
     private_note: str
 ):
 
-    response = client.chat.completions.create(
-        model=MODEL_NAME,
-        messages=[
-            {
-                "role": "user",
-                "content": (
-                    prompt
-                    + "\n\nTEXT INZERATU:\n"
-                    + job_text
-                    + "\n\nSOUKROMÁ POZNÁMKA:\n"
-                    + private_note
-                )
-            }
-        ],
-        response_format={"type": "json_object"}
-    )
+    if not USE_REAL_API:
+        row = {
+            "mock": "mock_app",
+            "title": "Mock title",
+            "company": "Mock company",
+            "location": "Mock location",
+
+            "final_score": 42,
+            "verdict": "Mock verdict",
+            "salary_estimate_czk": 70000
+        }
+        markdown = "# MOCK OUTPUT"
+
+        return markdown, row
+
+    else:
+        
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {
+                    "role": "user",
+                    "content": (
+                        prompt
+                        + "\n\nTEXT INZERATU:\n"
+                        + job_text
+                        + "\n\nSOUKROMÁ POZNÁMKA:\n"
+                        + private_note
+                    )
+                }
+            ],
+            response_format={"type": "json_object"}
+        )
 
     data = json.loads(
         response.choices[0].message.content
@@ -193,6 +210,7 @@ URL: {url}
 {data["final_recommendation"]}
 """
     row = {
+        "mock": "",
         "title": data.get("title", ""),
         "company": data.get("company", ""),
         "location": data.get("location", ""),

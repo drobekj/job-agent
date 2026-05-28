@@ -18,6 +18,7 @@ cursor.execute("""
         verdict,
         salary_estimate_czk,
         is_shortlisted,
+        status,
         url
     FROM job_evaluations
     ORDER BY id DESC
@@ -39,6 +40,7 @@ for row in rows:
     verdict,
     salary_estimate,
     is_shortlisted,
+    status,
     url
     ) = row 
 
@@ -51,6 +53,7 @@ for row in rows:
     print(f"Verdict: {verdict}")
     print(f"Salary estimate: {salary_estimate} CZK")
     print(f"Shortlisted: {bool(is_shortlisted)}")
+    print(f"Status: {status}")
     print(f"URL: {url}")
     print("-" * 80)
 
