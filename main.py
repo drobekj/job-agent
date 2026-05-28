@@ -1,7 +1,7 @@
 from config import (INPUT_FILE, OUTPUT_DIR, DATABASE_PATH)
 from fetcher import fetch_job_text
 from evaluator import evaluate_job
-from db import init_db, save_evaluation
+from db import init_db, save_evaluation, job_exists
 from prompts import build_prompt
 import json
 
@@ -15,6 +15,9 @@ all_markdown = ""
 
 for job in jobs:
     job_url = job["url"]
+    if job_exists(conn, job_url):
+        print(f"SKIP (already exists): {job_url}")
+        continue
     private_note = job.get("private_note", "")
     job_text = fetch_job_text(job_url)
     markdown, row = evaluate_job(job_url, prompt, job_text, private_note)

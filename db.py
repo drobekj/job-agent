@@ -25,6 +25,22 @@ def init_db(DATABASE_PATH) -> sqlite3.Connection:
     conn.commit()
     return conn
 
+def job_exists(
+    conn,
+    url: str
+) -> bool:
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT 1
+        FROM job_evaluations
+        WHERE url = ?
+        LIMIT 1
+    """, (url,))
+
+    return cursor.fetchone() is not None
+
 def save_evaluation(
     conn,
     url: str,
@@ -39,6 +55,12 @@ def save_evaluation(
     markdown_report: str
 ):
     cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM job_evaluations
+        WHERE url LIKE ?
+        AND markdown_report = '# MOCK OUTPUT'
+    """, (f"%{url}%",))
 
     cursor.execute("""
         INSERT OR IGNORE INTO job_evaluations (
