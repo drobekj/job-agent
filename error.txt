@@ -1,0 +1,17 @@
+python -c "from sources.providers.zurich import discover; import pprint; pprint.pp(discover()[0])"
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from sources.providers.zurich import discover; import pprint; pprint.pp(discover()[0])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drobe\job_agent\sources\providers\zurich.py", line 114
+    text = fetch_job_text(url)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+(.venv) (base) PS C:\Users\drobe\job_agent> 
+
+
+
+
+
+
+

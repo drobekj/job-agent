@@ -1,14 +1,13 @@
-from config import (INPUT_FILE, OUTPUT_DIR, DATABASE_PATH)
+from config import DATABASE_PATH
+from sources.loader import load_jobs_to_process
 from fetcher import fetch_job_text
 from evaluator import evaluate_job
 from db import init_db, save_evaluation, job_exists
 from prompts import build_prompt
-import json
 
 prompt = build_prompt()
 
-with open(INPUT_FILE, "r", encoding="utf-8") as f:
-    jobs = json.load(f)
+jobs = load_jobs_to_process()
 
 conn = init_db(DATABASE_PATH)
 all_markdown = ""

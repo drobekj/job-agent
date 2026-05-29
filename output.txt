@@ -1,8 +1,46 @@
-DB path: jobs.db
+ python -c "from sources.providers.generali import discover; jobs=discover(); print(len(jobs)); import pprint; pprint.pp(jobs[:5])"
+124
+[{'url': 'https://generaliceska.jobs.cz/detail-pozice/?id=2001251804',
+  'source_id': 'generali',
+  'source_type': 'company_career',
+  'private_note': '',
+  'title': 'JUNIOR PRODUCTS MANAGER',
+  'location': 'Praha, Hlavní město Praha, Česká republika',
+  'company': 'Generali Česká pojišťovna'},
+ {'url': 'https://generaliceska.jobs.cz/detail-pozice/?id=2000568469',
+  'source_id': 'generali',
+  'source_type': 'company_career',
+  'private_note': '',
+  'title': '📌VOLNÁ ŽIDLE PORADCE/PORADKYNĚ na pobočce v Praze 10 - HPP',
+  'location': 'Praha, Hlavní město Praha, Česká republika',
+  'company': 'Generali Česká Distribuce'},
+ {'url': 'https://generaliceska.jobs.cz/detail-pozice/?id=2000630682',
+  'source_id': 'generali',
+  'source_type': 'company_career',
+  'private_note': '',
+  'title': '📌VOLNÁ ŽIDLE PORADCE/PORADKYNĚ na pobočce v Praze 1 - HPP',
+  'location': 'Praha, Hlavní město Praha, Česká republika',
+  'company': 'Generali Česká Distribuce'},
+ {'url': 'https://generaliceska.jobs.cz/detail-pozice/?id=2000901148',
+  'source_id': 'generali',
+  'source_type': 'company_career',
+  'private_note': '',
+  'title': '📌VOLNÁ ŽIDLE PORADCE/PORADKYNĚ na pobočce v Praze 4-Hráského – HPP',
+  'location': 'Praha, Hlavní město Praha, Česká republika',
+  'company': 'Generali Česká Distribuce'},
+ {'url': 'https://generaliceska.jobs.cz/detail-pozice/?id=2001096233',
+  'source_id': 'generali',
+  'source_type': 'company_career',
+  'private_note': '',
+  'title': '📌VOLNÁ ŽIDLE PORADCE/PORADKYNĚ na pobočce v Praze 7 Holešovicích- '
+           'HPP',
+  'location': 'Praha, Hlavní město Praha, Česká republika',
+  'company': 'Generali Česká Distribuce'}]
+(.venv) (base) PS C:\Users\drobe\job_agent> 
 
-ID: 1
-Processed: 2026-05-28 06:33:03
-Score: 21
-Verdict: be good
-Salary estimate: 12345 CZK
-URL: https://www.careers.zurich.com/job/Bratislava-Actuarial-Model-Developer/1358204057/
+
+
+
+
+
+

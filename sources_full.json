@@ -1,0 +1,170 @@
+[
+  {
+    "id": "jobs_cz_actuarial",
+    "name": "Jobs.cz – Pojistný matematik",
+    "type": "job_portal_search",
+    "url": "https://www.jobs.cz/prace/pojistny-matematik/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "jobs_cz_actuary",
+    "name": "Jobs.cz – Actuary",
+    "type": "job_portal_search",
+    "url": "https://www.jobs.cz/prace/?q%5B%5D=Actuary",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "jobs_cz_data_analyst",
+    "name": "Jobs.cz – Data Analyst",
+    "type": "job_portal_search",
+    "url": "https://www.jobs.cz/prace/?q%5B%5D=data+analyst",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "swissre_global",
+    "name": "Swiss Re Careers",
+    "type": "company_career",
+    "url": "https://www.swissre.com/careers/jobSearch.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "swissre_slovakia",
+    "name": "Swiss Re Slovakia Careers",
+    "type": "company_career",
+    "url": "https://www.swissre.com/careers/slovakia-careers.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "zurich_slovakia",
+    "name": "Zurich Slovakia Careers",
+    "type": "company_career",
+    "url": "https://slovakia.zurich.com/company-that-cares/we-offer-unique-job-opportunities",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "allianz_global_actuarial",
+    "name": "Allianz – Actuarial Jobs",
+    "type": "company_career_search",
+    "url": "https://careers.allianz.com/au/en/c/actuarial-jobs",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "allianz_cz",
+    "name": "Allianz Czech Republic Careers",
+    "type": "company_career",
+    "url": "https://allianz.jobs.cz/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "generali_cz",
+    "name": "Generali Česká pojišťovna Careers",
+    "type": "company_career",
+    "url": "https://generaliceska.jobs.cz/volna-mista/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "uniqa_cz",
+    "name": "UNIQA Czech Republic Careers",
+    "type": "company_career",
+    "url": "https://uniqa.jobs.cz/volna-mista",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "kooperativa_cz",
+    "name": "Kooperativa Careers",
+    "type": "company_career",
+    "url": "https://kooperativa.jobs.cz/",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "vig_group",
+    "name": "Vienna Insurance Group Careers",
+    "type": "company_career",
+    "url": "https://group.vig/en/career/",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "vig_re",
+    "name": "VIG RE Careers",
+    "type": "company_career",
+    "url": "https://career.vig-re.com/open-positions/a-2/",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "csob_cz",
+    "name": "ČSOB Careers",
+    "type": "company_career",
+    "url": "https://csob.jobs.cz/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "ceska_sporitelna_cz",
+    "name": "Česká spořitelna Careers",
+    "type": "company_career",
+    "url": "https://csas.jobs.cz/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "erste_group",
+    "name": "Erste Group Careers",
+    "type": "company_career",
+    "url": "https://www.erstegroup.com/en/career/positions-offered",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "erste_digital",
+    "name": "Erste Digital Careers",
+    "type": "company_career",
+    "url": "https://erstedigital.recruitee.com/",
+    "priority": 2,
+    "enabled": true
+  },
+  {
+    "id": "kpmg_cz",
+    "name": "KPMG Czech Republic Careers",
+    "type": "company_career",
+    "url": "https://kpmg.com/cz/en/careers.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "deloitte_cz_sk",
+    "name": "Deloitte Czech Republic / Slovakia Careers",
+    "type": "company_career",
+    "url": "https://www.deloitte.com/cz-sk/en/careers.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "deloitte_ce_search",
+    "name": "Deloitte CE Job Search",
+    "type": "company_career_search",
+    "url": "https://www.deloitte.com/ce/en/careers/job-search.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "emerald_actuarial",
+    "name": "Emerald Group – Actuarial Jobs",
+    "type": "specialized_job_portal",
+    "url": "https://www.emerald-group.com/job/",
+    "priority": 3,
+    "enabled": true
+  }
+]

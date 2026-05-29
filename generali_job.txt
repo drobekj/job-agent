@@ -1,0 +1,638 @@
+ 
+ 
+ 
+     
+     
+	
+     
+ 
+ 
+ 
+
+     
+ 
+ 
+ 
+ 
+
+
+ 
+      Odpovědní formulář | Generali Česká pojišťovna 
+		 
+		 
+		     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+	     
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',"GTM-TVVHFM");
+     
+    		  
+		  
+		  
+		  
+		 
+			var cse$ = $.noConflict();
+			var $ = cse$;
+		 
+			     
+ 
+ 
+ 
+ 
+  
+ 
+    .cc_div {
+        font-size: 14px;
+    }
+ 
+ 
+    const NECESSARY_COOKIES = [
+        'lmc_ccm',
+        'lmc_ccm_jobs',
+    ];
+
+    const PERSONALIZATION_COOKIES  = [
+        'jobs_user_id',
+    ];
+
+    function deleteCookie(name) {
+        document.cookie = name + '=; Path=/;  Domain=' + '.jobs.cz' + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name +'=; Path=/;  Domain=' + location.hostname +  '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name +'=; Path=/;  Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function deletePersonalizationCookies() {
+        for (let index = 0; index   -1 ? cookie.substr(0, eqPos) : cookie;
+            let canDelete = true;
+            cookiesToKeep.forEach(function(necessaryCookie) {
+                if (name.trim().indexOf(necessaryCookie) !== -1) {
+                    canDelete = false;
+                }
+            });
+
+            if (canDelete) {
+                deleteCookie(name)
+            }
+        }
+    }
+
+    function deleteCookies(cookieConsent)
+    {
+        let cookiesToKeep = NECESSARY_COOKIES;
+
+        if (cookieConsent.allowedCategory('personalization'))  {
+            cookiesToKeep.concat(PERSONALIZATION_COOKIES);
+        } else {
+            deletePersonalizationCookies();
+        }
+
+        if (!cookieConsent.allowedCategory('analytics')) {
+            deleteAnalyticsCookies(cookiesToKeep);
+        }
+    }
+
+    function detectLang() {
+        const MISSING_LANG_ATTRIBUTE_FALLBACK = 'cs';
+        const MISSING_TRANSLATION_FALLBACK = 'en';
+
+        const documentLang = document.documentElement.lang.split('-')[0].toLowerCase();
+        let lang = documentLang === '' ? MISSING_LANG_ATTRIBUTE_FALLBACK : documentLang;
+        const languages = ["cs","de","en","hu","pl","ru","sk","uk"];
+
+        if (languages.indexOf(lang) === -1) {
+            lang = MISSING_TRANSLATION_FALLBACK;
+        }
+
+        return lang;
+    }
+
+    function updateJobsConsent(cookieConsent) {
+        const disableDomainPattern = /topjobs.sk/;
+        if (
+            !disableDomainPattern.test(window.location.hostname) && (
+            cookieConsent.allowedCategory('analytics') ||
+            cookieConsent.allowedCategory('personalization') ||
+            cookieConsent.allowedCategory('functionality') ||
+            cookieConsent.allowedCategory('ad')
+        )) {
+            fetch("https://www.jobs.cz/api/cookie-consent/v1/update/", {
+                method: "POST",
+                credentials: 'include',
+                body: JSON.stringify({level: cookieConsent.get('level')})
+            });
+        }
+    }
+
+    function clearLocalStorage(cookieConsent)
+    {
+        if (!cookieConsent.allowedCategory('analytics')) {
+            localStorage.clear();
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        const cookieBannerConfig = {"revision":1};
+
+        window.ccm = initLmcCookieConsentManager(
+            'CP_' + location.host,
+            {
+                autodetectLang: false,
+                defaultLang: detectLang(),
+                config: cookieBannerConfig,
+                displayMode: "force",
+                companyNames: ["Alma Career"],
+                translationOverrides: [],
+                onFirstAccept: (cookieConsent) => {
+                    updateJobsConsent(cookieConsent);
+                    document.dispatchEvent(new Event('LMC_career_widget_cookieConsentAccepted'));
+                },
+                onAccept: (cookieConsent) => {
+                    clearLocalStorage(cookieConsent);
+                    deleteCookies(cookieConsent);
+                },
+                onChange: (cookieConsent, categories) => {
+                    clearLocalStorage(cookieConsent);
+                    updateJobsConsent(cookieConsent);
+                    deleteCookies(cookieConsent);
+                    location.reload();
+                },
+            }
+        );
+    });
+ 
+
+     
+ 
+ 
+
+     
+          
+     
+    
+		     
+    document.body.className=document.body.className.replace(/no-js/,'js');
+ 
+
+		     
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
+	{ (i[r].q=i[r].q||[]).push(arguments)}
+		,i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-73070037-1', 'auto');
+	ga('send', 'pageview');
+ 
+
+		 
+			    
+
+ 
+	 
+		 
+			 
+				 
+					 
+															 
+						 
+															 
+								 
+								 
+								 
+								 
+													 
+					 
+
+																																									
+						 
+							 
+								    
+							 
+							 
+								    
+							 
+							 
+								    
+							 
+						 
+									 
+			 
+		 
+		 
+			 
+				 
+				 
+					 
+						 
+							 Přepnout navigaci    
+							     
+						 
+
+						 
+							  
+						 
+													 
+								 
+									    
+								 
+								 
+									    
+								 
+								 
+									    
+								 
+							 
+											 
+					 
+						 
+							 
+								 O nás 
+								 
+									 
+										 Generali Česká pojišťovna  
+									 
+										 Generali penzijní společnost 
+									 
+									 
+										 Generali Česká Distribuce 
+									 
+								 
+							 
+							 
+								 Volná místa  
+							 
+								 Proč k nám  
+							 
+								 Obchodní kariéra  
+							 
+								 Trainee program  
+							 
+								 Studenti a absolventi  
+							 
+								 Kontakt  
+							 
+								 GDPR  
+						 
+					 
+				 
+			 
+		 
+	 
+ 
+
+			 
+					 
+		 
+			 
+					
+	  
+
+				  
+				    
+ 
+	 
+ 
+
+			 
+		 
+	 
+			 
+			    
+ 
+			    
+
+																																																			
+ 
+	 
+		 
+			 
+				 
+					 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+													 
+								 
+							 
+											 
+				 
+			 
+		 
+	 
+
+		    
+
+ 
+	 
+		 
+			 
+				 
+					 
+																				 
+							 © 2026 Generali Česká pojišťovna 
+												 
+							 Powered by
+								 Alma Career 
+							 
+						 
+					 
+				 
+			 
+
+			 
+				 
+																	
+						 
+							 			Generali Česká pojišťovna
+ 
+							 
+																											 
+											  			Naše hodnoty
+  
+										 
+																																				 
+											  			Benefity
+  
+										 
+																																				 
+											  			Jaké to u&nbsp;nás je
+  
+										 
+																																				 
+											  			Podporujeme
+  
+										 
+																								 
+						 
+
+												
+						 
+							 			Volná místa
+ 
+							 
+																											 
+											  			Všechna volná místa
+  
+										 
+																																				 
+											  			Volná místa Obchod
+  
+										 
+																																				 
+											  			Volná místa Call centrum
+  
+										 
+																																				 
+											  			Volná místa Studenti a&nbsp;absolventi
+  
+										 
+																								 
+						 
+
+																		
+						  
+						 
+															 			Výběrové řízení
+ 
+														 
+																											 
+											  			Průběh výběrového řízení
+  
+										 
+																								 
+						 
+
+																		
+						 
+															 			Kontakty
+ 
+														 
+																											 
+											  			Kontakt centrála
+  
+										 
+																																				 
+											  			Napište nám
+  
+										 
+																								 
+						 
+									 
+			 
+		 
+	 
+ 
+
+	    
+
+
+ 
+	 
+		 
+			 
+				 
+					 
+						 
+							 
+								    
+							 
+							 
+								    
+							 
+							 
+								    
+							 
+						 
+					 
+				 
+			 
+		 
+		      
+
+	 
+
+ 
+
+		 
+		    
+
+    
+ 
+     
+
+ 
+     
+
+ 
+     
+
+ 
+    	 
+		Děkujeme za Váš zájem o pozici v Generali České pojišťovně a.s. Vámi zaslané materiály byly zařazeny do výběrového řízení. V následujících dnech je budou naši specialisté náboru porovnávat s požadavky kladenými na výše uvedenou pracovní pozici.
+		 Mezitím můžete nahlédnout k nám do společnosti. 
+		 
+	 
+ 
+
+
+
+	
+     
+     
+         
+             
+                 
+                     
+                         
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                         
+                     
+                 
+             
+             
+                 
+                     
+                         
+                             Nahlásit nezákonný obsah 
+                         
+                         
+                             Nastavení cookies 
+                         
+                         
+                             Transparentnost 
+                         
+                         
+                             Reklama na portálech Alma Career 
+                         
+                         
+                             Zásady ochrany soukromí 
+                         
+                         
+                             Podmínky používání 
+                         
+                     
+                 
+             
+         
+         
+             
+                 © Alma Career Czechia s.r.o. Vizuální podoba webové stránky může být rovněž předmětem autorských práv třetích stran 
+                 Webovou stránku stránku pro klienta vytvořila a provozuje Alma Career Czechia s.r.o., IČO 26441381, se sídlem Menclova 2538/2, Libeň, 180 00 Praha 8, sp. zn. C 82484 vedená u Městského soudu v Praze. 
+             
+         
+     
+ 
+
+
+     
+        window.__LMC_CAREER_WIDGET__ = [];
+     
+
+
+    
+     
+        window.__LMC_CAREER_WIDGET__.push({"apiKey":"f1722c10335794fb464f88f677a2f4d85ccbe55cc24a34825b47800c35f174ee","widgetId":"f737f198-f384-4aec-8ac3-c0f688e23b2d","selector":"#widget_container","shareJobAdUrlTemplate":"https:\/\/generaliceska.jobs.cz\/share\/__jobAdId__","environment":"prod","themes":[],"pagePath":"volna-mista","detailPath":"detail-pozice","replyPath":"detail-pozice\/odpovedni-formular","onePage":false,"gtm":{"id":"GTM-TVVHFM","insertScript":false},"host":"generaliceska.jobs.cz","logger":["rollbar"]});
+     
+
+         
+        (function() {
+            var defaultTitle = document.title;
+            var titleTemplate = "%positionName% - %pageName% | Generali \u010cesk\u00e1 poji\u0161\u0165ovna";
+            var errorTitle = "Str\u00e1nka nenalezena";
+            var widgetSelector = "#widget_container";
+
+            function getPageTitleFromTemplate(positionName, pageName) {
+                var data = {
+                    positionName: positionName,
+                    pageName: pageName
+                };
+
+                return titleTemplate.replace(/%([^%]+)%/gi, function (matched, index) {
+                    return data[index] || '';
+                });
+            }
+
+            document.querySelector(widgetSelector).addEventListener('LMC_career_widget_pageRendered', function (event) {
+                var type = event.detail.pageType;
+                var positionName = event.detail.positionName;
+                var title = defaultTitle;
+
+                if (type === 'detail') {
+                    title = getPageTitleFromTemplate(positionName, 'Detail pozice');
+                } else if (type === 'replyForm' || type === 'hooray') {
+                    title = getPageTitleFromTemplate(positionName, 'Odpovědní formulář');
+                }
+
+                document.title = title;
+            });
+
+            document.querySelector(widgetSelector).addEventListener('LMC_career_widget_errorRendered', function (event) {
+                document.title = event.detail.errorType === 'pageNotFound' ? errorTitle : defaultTitle;
+            });
+        })();
+     
+
+
+      
+
+
+	  
+	  
+	  
+	  
+
+  
+ 
+    AtmoskopProfileLinkWidgetV3.init();
+ 
+
+ 
+ 

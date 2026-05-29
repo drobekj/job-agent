@@ -1,0 +1,26 @@
+[
+  {
+    "id": "jobs_cz_actuarial",
+    "name": "Jobs.cz – Pojistný matematik",
+    "type": "job_portal_search",
+    "url": "https://www.jobs.cz/prace/pojistny-matematik/",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "swissre_careers",
+    "name": "Swiss Re Careers",
+    "type": "company_career",
+    "url": "https://www.swissre.com/careers/jobSearch.html",
+    "priority": 1,
+    "enabled": true
+  },
+  {
+    "id": "zurich_slovakia",
+    "name": "Zurich Slovakia Careers",
+    "type": "company_career",
+    "url": "https://slovakia.zurich.com/company-that-cares/we-offer-unique-job-opportunities",
+    "priority": 1,
+    "enabled": true
+  }
+]
