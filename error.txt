@@ -1,17 +1,106 @@
-python -c "from sources.providers.zurich import discover; import pprint; pprint.pp(discover()[0])"
+(.venv) (base) PS C:\Users\drobe\job_agent> python main.py
+SKIP (already exists): https://www.careers.zurich.com/job/Bratislava-Actuarial-Model-Developer/1358204057/
+SKIP (already exists): https://www.linkedin.com/jobs/view/4420296815
+SKIP (already exists): https://www.linkedin.com/jobs/view/4417616773
+SKIP (already exists): https://www.linkedin.com/jobs/view/4420293982
+SKIP (already exists): https://www.careers.zurich.com/job/Bratislava-Actuarial-Model-Developer/1358204057/
+SKIP (already exists): https://www.careers.zurich.com/job/Bratislava-Pricing-Analyst/1360232457/
+SKIP (already exists): https://www.careers.zurich.com/job/Bratislava-Reporting-Team-Lead-Zurich-Farmers-New-World-Life/1354336657/
+SKIP (already exists): https://www.careers.zurich.com/job/Z%C3%BCrich-Captive-Pricing-Actuary-80-100/1360669157/
+SKIP (already exists): https://generaliceska.jobs.cz/detail-pozice/?id=2001251804
+SKIP (already exists): https://generaliceska.jobs.cz/detail-pozice/?id=2000568469
+SKIP (already exists): https://generaliceska.jobs.cz/detail-pozice/?id=2000630682
 Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-    from sources.providers.zurich import discover; import pprint; pprint.pp(discover()[0])
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\drobe\job_agent\sources\providers\zurich.py", line 114
-    text = fetch_job_text(url)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
-(.venv) (base) PS C:\Users\drobe\job_agent> 
-
-
-
-
-
-
-
+  File "C:\Users\drobe\job_agent\main.py", line 26, in <module>
+    markdown, row = evaluate_job(
+                    ~~~~~~~~~~~~^
+        job_url,
+        ^^^^^^^^
+    ...<2 lines>...
+        private_note
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\drobe\job_agent\evaluator.py", line 64, in evaluate_job
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+    ...<12 lines>...
+        response_format={"type": "json_object"},
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1215, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<51 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_base_client.py", line 1037, in request
+    response = self._send_request(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_client.py", line 440, in _send_request
+    return self._send_with_auth_retry(request, stream=stream, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_client.py", line 418, in _send_with_auth_retry
+    response = super()._send_request(request, stream=stream, **kwargs)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\openai\_base_client.py", line 964, in _send_request
+    return self._client.send(request, stream=stream, **kwargs)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+        self.READ_NUM_BYTES, timeout=timeout
+    )
+  File "C:\Users\drobe\job_agent\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\drobe\miniforge3\Lib\ssl.py", line 1285, in recv
+    return self.read(buflen)
+           ~~~~~~~~~^^^^^^^^
+  File "C:\Users\drobe\miniforge3\Lib\ssl.py", line 1140, in read
+    return self._sslobj.read(len)
+           ~~~~~~~~~~~~~~~~~^^^^^
+KeyboardInterrupt

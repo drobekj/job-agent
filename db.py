@@ -1,6 +1,7 @@
 import sqlite3
 from config import DATABASE_PATH
 
+
 def init_db(DATABASE_PATH) -> sqlite3.Connection:
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
@@ -10,6 +11,7 @@ def init_db(DATABASE_PATH) -> sqlite3.Connection:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             processed_at TEXT NOT NULL,
             url TEXT NOT NULL UNIQUE,
+            source_file TEXT,
             title TEXT,
             company TEXT,
             location TEXT,
@@ -18,18 +20,31 @@ def init_db(DATABASE_PATH) -> sqlite3.Connection:
             salary_estimate_czk INTEGER,
             is_shortlisted INTEGER,
             status TEXT,
+            private_note TEXT DEFAULT '',
             markdown_report TEXT
         )
     """)
 
+    cursor.execute("PRAGMA table_info(job_evaluations)")
+    columns = [row[1] for row in cursor.fetchall()]
+
+    if "source_file" not in columns:
+        cursor.execute("""
+            ALTER TABLE job_evaluations
+            ADD COLUMN source_file TEXT
+        """)
+
+    if "private_note" not in columns:
+        cursor.execute("""
+            ALTER TABLE job_evaluations
+            ADD COLUMN private_note TEXT DEFAULT ''
+        """)
+
     conn.commit()
     return conn
 
-def job_exists(
-    conn,
-    url: str
-) -> bool:
 
+def job_exists(conn, url: str) -> bool:
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -41,9 +56,11 @@ def job_exists(
 
     return cursor.fetchone() is not None
 
+
 def save_evaluation(
     conn,
     url: str,
+    source_file: str,
     title: str,
     company: str,
     location: str,
@@ -52,6 +69,7 @@ def save_evaluation(
     salary_estimate_czk: int,
     is_shortlisted: int,
     status: str,
+    private_note: str,
     markdown_report: str
 ):
     cursor = conn.cursor()
@@ -66,6 +84,7 @@ def save_evaluation(
         INSERT OR IGNORE INTO job_evaluations (
             processed_at,
             url,
+            source_file,
             title,
             company,
             location,
@@ -74,14 +93,16 @@ def save_evaluation(
             salary_estimate_czk,
             is_shortlisted,
             status,
+            private_note,
             markdown_report
         )
         VALUES (
             datetime('now'),
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )
     """, (
         url,
+        source_file,
         title,
         company,
         location,
@@ -90,6 +111,7 @@ def save_evaluation(
         salary_estimate_czk,
         is_shortlisted,
         status,
+        private_note,
         markdown_report
     ))
 

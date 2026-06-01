@@ -10,8 +10,8 @@ def main():
     discovered_jobs = []
 
     discovered_jobs.extend(discover_zurich())
-    discovered_jobs.extend(discover_generali())
-    discovered_jobs.extend(discover_swissre())
+    #discovered_jobs.extend(discover_generali())
+    #discovered_jobs.extend(discover_swissre())
 
     with open(DISCOVERED_JOBS_PATH, "w", encoding="utf-8") as f:
         json.dump(discovered_jobs, f, ensure_ascii=False, indent=2)
