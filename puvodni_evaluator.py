@@ -1,7 +1,7 @@
 from openai import OpenAI
 import json
-from metadata_extractor import extract_job_metadata
-from config import OPENAI_API_KEY, MODEL_NAME
+
+from config import OPENAI_API_KEY, MODEL_NAME, USE_REAL_API
 
 
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -45,43 +45,19 @@ def evaluate_job(
     url: str,
     prompt: str,
     job_text: str,
-    private_note: str = "",
-    use_real_api: bool = False,
-    page_title: str = "",
-    og_title: str = "",
-    json_ld: list | None = None,
+    private_note: str
 ):
-    if not use_real_api:
-        metadata = extract_job_metadata(
-            url=url,
-            page_title=page_title,
-            og_title=og_title,
-            json_ld=json_ld or [],
-            job_text=job_text,
-        )
-
+    if not USE_REAL_API:
         row = {
-            "mock": "",
-            "title": metadata.get("title", "") or "Prepared job",
-            "company": metadata.get("company", ""),
-            "location": metadata.get("location", ""),
-            "final_score": 0,
-            "verdict": "",
-            "salary_estimate_czk": 0,
+            "mock": "mock_app",
+            "title": "Mock title",
+            "company": "Mock company",
+            "location": "Mock location",
+            "final_score": 42,
+            "verdict": "Mock verdict",
+            "salary_estimate_czk": 70000,
         }
-
-        markdown = f"""# Prepared job
-
-            URL: {url}
-
-            Evaluation has not been run yet.
-
-            ## Extracted metadata
-
-            - Title: {row["title"]}
-            - Company: {row["company"]}
-            - Location: {row["location"]}
-            """
+        markdown = "# MOCK OUTPUT"
 
         return markdown, row
 
@@ -103,67 +79,33 @@ def evaluate_job(
         timeout=120,
     )
 
-    data = json.loads(
-        response.choices[0].message.content
-    )
+    data = json.loads(response.choices[0].message.content)
 
     components = data.get("components", {})
 
-    salary_estimate = int(
-        data.get("salary_estimate_czk", 0)
-    )
+    salary_estimate = int(data.get("salary_estimate_czk", 0))
+    comp_score = compensation_score(salary_estimate)
 
-    comp_score = compensation_score(
-        salary_estimate
+    modeling_score, modeling_comment = component_score_and_comment(
+        components, "modeling_relevance"
     )
-
-    modeling_score, modeling_comment = (
-        component_score_and_comment(
-            components,
-            "modeling_relevance",
-        )
+    remote_score, remote_comment = component_score_and_comment(
+        components, "remote_location_fit"
     )
-
-    remote_score, remote_comment = (
-        component_score_and_comment(
-            components,
-            "remote_location_fit",
-        )
+    technical_score, technical_comment = component_score_and_comment(
+        components, "technical_fit"
     )
-
-    technical_score, technical_comment = (
-        component_score_and_comment(
-            components,
-            "technical_fit",
-        )
+    learning_score, learning_comment = component_score_and_comment(
+        components, "learning_growth_potential"
     )
-
-    learning_score, learning_comment = (
-        component_score_and_comment(
-            components,
-            "learning_growth_potential",
-        )
+    bullshit_score, bullshit_comment = component_score_and_comment(
+        components, "bullshit_risk_penalty"
     )
-
-    bullshit_score, bullshit_comment = (
-        component_score_and_comment(
-            components,
-            "bullshit_risk_penalty",
-        )
+    reporting_score, reporting_comment = component_score_and_comment(
+        components, "reporting_heavy_penalty"
     )
-
-    reporting_score, reporting_comment = (
-        component_score_and_comment(
-            components,
-            "reporting_heavy_penalty",
-        )
-    )
-
-    english_score, english_comment = (
-        component_score_and_comment(
-            components,
-            "english_client_facing_penalty",
-        )
+    english_score, english_comment = component_score_and_comment(
+        components, "english_client_facing_penalty"
     )
 
     component_rows = [
@@ -220,30 +162,20 @@ def evaluate_job(
         ),
     ]
 
-    final_score = sum(
-        row[2]
-        for row in component_rows
-    )
+    final_score = sum(row[2] for row in component_rows)
 
     calculation = " + ".join(
-        str(row[2])
-        for row in component_rows
+        str(row[2]) for row in component_rows
     ).replace("+ -", "- ")
 
     positives = "\n".join(
         f"- {item}"
-        for item in safe_list(
-            data,
-            "main_positives",
-        )
+        for item in safe_list(data, "main_positives")
     )
 
     risks = "\n".join(
         f"- {item}"
-        for item in safe_list(
-            data,
-            "main_risks",
-        )
+        for item in safe_list(data, "main_risks")
     )
 
     table = (
@@ -251,13 +183,7 @@ def evaluate_job(
         "|---|---:|---:|---|\n"
     )
 
-    for (
-        name,
-        score_range,
-        score,
-        comment,
-    ) in component_rows:
-
+    for name, score_range, score, comment in component_rows:
         table += (
             f"| {name} "
             f"| {score_range} "

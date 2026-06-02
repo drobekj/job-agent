@@ -4,8 +4,8 @@ conn = sqlite3.connect("jobs.db")
 
 conn.execute("""
 UPDATE job_evaluations
-SET status = "applied"
-WHERE id = 143
+SET final_score = 91
+WHERE id = 158
 """)
 
 conn.commit()
