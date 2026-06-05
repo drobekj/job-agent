@@ -1,12 +1,16 @@
 import sqlite3
 
 conn = sqlite3.connect("jobs.db")
+cur = conn.cursor()
 
-conn.execute("""
-UPDATE job_evaluations
-SET status = "applied"
-WHERE id in (168,159)
+cur.execute("""
+SELECT private_note
+FROM job_evaluations
+WHERE id=194
 """)
 
-conn.commit()
+for row in cur.fetchall():
+    print(row)
+    print()
+
 conn.close()
