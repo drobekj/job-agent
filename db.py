@@ -96,15 +96,12 @@ def has_ai_evaluation(conn, url: str) -> bool:
     status = job.get("status") or ""
     markdown_report = job.get("markdown_report") or ""
 
-    if status == "prepared":
+    if verdict.strip() == "":
         return False
 
     if verdict.strip() == "":
         return False
-
-    if markdown_report.startswith("# Prepared job"):
-        return False
-
+    
     return True
 
 

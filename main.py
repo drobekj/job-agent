@@ -108,7 +108,7 @@ def main():
                 verdict=row["verdict"],
                 salary_estimate_czk=row["salary_estimate_czk"],
                 is_shortlisted=is_shortlisted,
-                status="prepared" if not use_real_api else "new",
+                status="new",
                 private_note=private_note,
                 markdown_report=markdown,
             )
