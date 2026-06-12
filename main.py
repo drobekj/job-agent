@@ -90,11 +90,6 @@ def main():
                 json_ld=json_ld,
             )
 
-            is_shortlisted = int(
-                row["final_score"] >= 40
-                or row["verdict"] == "Apply"
-            )
-
             db_url = job_url + row["mock"]
 
             save_evaluation(
@@ -107,7 +102,6 @@ def main():
                 final_score=row["final_score"],
                 verdict=row["verdict"],
                 salary_estimate_czk=row["salary_estimate_czk"],
-                is_shortlisted=is_shortlisted,
                 status="new",
                 private_note=private_note,
                 markdown_report=markdown,

@@ -127,7 +127,6 @@ def save_evaluation(
     final_score: int,
     verdict: str,
     salary_estimate_czk: int,
-    is_shortlisted: int,
     status: str,
     private_note: str,
     markdown_report: str,
@@ -151,14 +150,13 @@ def save_evaluation(
             final_score,
             verdict,
             salary_estimate_czk,
-            is_shortlisted,
             status,
             private_note,
             markdown_report
         )
         VALUES (
             datetime('now'),
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )
         ON CONFLICT(url) DO UPDATE SET
             processed_at = datetime('now'),
@@ -169,7 +167,6 @@ def save_evaluation(
             final_score = excluded.final_score,
             verdict = excluded.verdict,
             salary_estimate_czk = excluded.salary_estimate_czk,
-            is_shortlisted = excluded.is_shortlisted,
             status = excluded.status,
             private_note = excluded.private_note,
             markdown_report = excluded.markdown_report
@@ -182,7 +179,6 @@ def save_evaluation(
         final_score,
         verdict,
         salary_estimate_czk,
-        is_shortlisted,
         status,
         private_note,
         markdown_report,
