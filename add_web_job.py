@@ -30,8 +30,13 @@ def parse_args():
         help="Job URL to add into inputs/web_jobs.json",
     )
 
-    return parser.parse_args()
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force evaluation even if already evaluated",
+    )
 
+    return parser.parse_args()
 
 def save_single_job_file(job: dict) -> None:
     file_path = Path(SINGLE_WEB_JOB_PATH)
@@ -70,9 +75,10 @@ def main():
         return
 
     if existing_state == "evaluated":
-        print("already evaluated")
-        return
-
+        if not (args.mode == "evaluate" and args.force):
+            print("already evaluated")
+            return
+        
     job = append_web_job(
         normalized_url,
         allow_existing_web=args.mode == "evaluate",
@@ -88,6 +94,9 @@ def main():
         "--mode",
         args.mode,
     ]
+
+    if args.force:
+        command.append("--force")
 
     result = subprocess.run(
         command,

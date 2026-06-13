@@ -16,6 +16,9 @@ def build_prompt() -> str:
     PRAVIDLA:
     - Buď přísný a praktický.
     - Nepředpokládej flexibilitu, pokud není v inzerátu nebo soukromé poznámce.
+    - Soukromá poznámka představuje explicitní preferenci kandidáta a MUSÍ být zohledněna při bodovém hodnocení.
+    - Pokud soukromá poznámka obsahuje silný pozitivní nebo negativní signál, promítni jej do příslušných komponent skóre.
+    - V poli private_note_impact stručně vysvětli, které komponenty a proč byly soukromou poznámkou ovlivněny.
     - Pokud je remote domluvený, nepenalizuj středoevropskou lokaci.
     - Nepenalizuj absenci konkrétní technologie, pokud role požaduje obecnou programátorskou schopnost.
     - Oceňuj learning curve, onboarding, training a ochotu firmy zaučit.

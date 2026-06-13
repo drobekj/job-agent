@@ -32,6 +32,12 @@ def parse_args():
         default="evaluate",
     )
 
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force re-evaluation even if AI evaluation already exists",
+    )
+
     return parser.parse_args()
 
 
@@ -61,9 +67,10 @@ def main():
         expected_db_url = db_url_for_mode(job_url, args.mode)
         if args.mode == "evaluate" and job_exists(conn, job_url):
             if has_ai_evaluation(conn, job_url):
-                mark_job_as_repeated(conn, job_url)
-                print(f"SKIP (AI evaluation already exists, marked renew): {job_url}")
-                continue
+                if not args.force:
+                    mark_job_as_repeated(conn, job_url)
+                    print(f"SKIP (AI evaluation already exists, marked renew): {job_url}")
+                    continue
         if args.mode == "prepare" and job_exists(conn, expected_db_url):
             print(f"SKIP (already exists): {expected_db_url}")
             continue
@@ -71,6 +78,18 @@ def main():
         source_file = job.get("source_file", "unknown")
         private_note = job.get("private_note", "")
 
+        if args.mode == "evaluate" and args.force and private_note == "":
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT private_note
+                FROM job_evaluations
+                WHERE url = ?
+                LIMIT 1
+            """, (job_url,))
+            row = cursor.fetchone()
+            if row and row[0]:
+                private_note = row[0]
+                
         try:
             page = fetch_job_page(job_url)
 

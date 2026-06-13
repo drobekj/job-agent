@@ -132,6 +132,7 @@ def save_evaluation(
     markdown_report: str,
 ):
     cursor = conn.cursor()
+    url = url.rstrip("/")
 
     cursor.execute("""
         DELETE FROM job_evaluations
@@ -184,4 +185,32 @@ def save_evaluation(
         markdown_report,
     ))
 
+    normalized_url = url.removesuffix("mock_app").rstrip("/")
+
+    cursor.execute("""
+        DELETE FROM job_evaluations
+        WHERE
+            rtrim(
+                CASE
+                    WHEN url LIKE '%mock_app'
+                    THEN substr(url, 1, length(url) - 8)
+                    ELSE url
+                END,
+                '/'
+            ) = ?
+        AND id <> (
+            SELECT MAX(id)
+            FROM job_evaluations
+            WHERE
+                rtrim(
+                    CASE
+                        WHEN url LIKE '%mock_app'
+                        THEN substr(url, 1, length(url) - 8)
+                        ELSE url
+                    END,
+                    '/'
+                ) = ?
+        )
+    """, (normalized_url, normalized_url))
+    
     conn.commit()
